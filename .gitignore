@@ -1,0 +1,48 @@
+# compiled
+**/*.aux
+**/*.log
+**/*.out
+**/*.synctex.gz
+**/*.toc
+**/*.pdf
+**/*.ppm
+**.*~
+**.*~*
+**.*dvi
+**.*fls
+**.*fdb_latexmk
+**.*swp
+**.*swo
+**.*idx
+**.*ilg
+**.*ind
+**-blx.bib
+**.bbl
+**.blg
+**.run.xml
+**.bcf
+**.maf
+**.mtc*
+
+# acronym
+**.acn
+**.acr
+**.alg
+**.glg
+**.glo
+**.gls
+**.ist
+
+
+# ignore all images, use a separate project
+**/*.jpg
+**/*.jpeg
+**/*.png
+
+
+# binaries
+cpanm
+
+
+# files to upload to githubio
+githubio
