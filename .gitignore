@@ -1,4 +1,9 @@
-# compiled
+**.svg
+**.png
+**.pdf
+
+
+# latex
 **/*.aux
 **/*.log
 **/*.out
@@ -32,17 +37,3 @@
 **.glo
 **.gls
 **.ist
-
-
-# ignore all images, use a separate project
-**/*.jpg
-**/*.jpeg
-**/*.png
-
-
-# binaries
-cpanm
-
-
-# files to upload to githubio
-githubio

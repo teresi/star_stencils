@@ -3,27 +3,29 @@
 MAKEFLAGS += --no-print-directory
 
 _root_dir := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-_cookbook_in := cookbook.tex
-_cookbook_out := cookbook.pdf
-_archive_dir := $(_root_dir)/archive
 
 
 .PHONY: all
-all: stencil.pdf
+all: stencil.svg
 
 
 .PHONY: install
 install: SHELL:=/usr/bin/env bash
-install:               ## install LaTeX dependencies w/ tlmgr
+install:
 	tlmgr install $$(<requirements.txt)
 
 
-.PHONY: stencile.pdf
+.PHONY: stencil.pdf
 stencil.pdf: stencil.tex requirements.txt
 	max_print_line=96 \
 		latexmk -pdf -time -use-make stencil.tex
 
 
+stencil.svg: stencil.pdf
+	pdf2svg $< $@
+
+
 .PHONY: clean
-clean:  ## remove temporary files
+clean:
 	latexmk -f -C stencil.pdf
+	rm -f stencil.svg

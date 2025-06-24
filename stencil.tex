@@ -1,24 +1,39 @@
-\documentclass{article}
+% star stencils
+%
+% stars drawn in TikZ
+% cut into painter's tape on a laser CNC
+% to be used as a stencil to paint onto the ceiling of a child's room
 
-%\usepackage[paperwidth=8in, paperheight=11.5in]{geometry}
+
+\documentclass[]{book}
+
 \usepackage[
-    paperwidth=1.89in,
-    paperheight=19in,
-    margin=0.2in,
+    paperwidth=1.89in,  % tape is 1.89" wide
+    paperheight=11in,   % tape is applied to a board 11" long
+    top=0.5in,
+    bottom=0.6in,       % help roughly center the stars
+    left=0.25in,
+    right=0.25in
 ]{geometry}
-
-\usepackage{pifont}
-\usepackage{utfsym}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,backgrounds}
 
-\newcommand{\sep}{\vskip13mm}
+\pagenumbering{gobble}  % laser cnc has trouble w/ text
 
-\pagenumbering{gobble}
+\makeatletter
+\@openrightfalse        % open left to compare the 2 pages left/right in viewer
+\makeatother
 
-% SEE https://tex.stackexchange.com/questions/58903/how-to-draw-star-in-tikz-background
-\newcommand{\tstar}[5]{% inner radius, outer radius, tips, rot angle, options
+
+
+\newcommand{\sep}{\vskip14mm}  % add space between stars so the tape doesn't tear
+\newcommand{\scale}{0.3937}    % 1 cm = 1 inch
+
+% SEE
+% https://tex.stackexchange.com/questions/58903/how-to-draw-star-in-tikz-background
+\newcommand{\tstar}[5]{
+% inner radius, outer radius, tips, rot angle, options
 \pgfmathsetmacro{\starangle}{360/#3}
 \draw[#5] (#4:#1)
 \foreach \x in {1,...,#3}
@@ -29,7 +44,8 @@
 
 
 % two 8 point stars, the second smaller and rotated 45
-\newcommand{\dstar}[5]{% inner radius, outer radius, rot angle, options, innerscale
+\newcommand{\dstar}[5]{
+% inner radius, outer radius, rot angle, options, innerscale
 \pgfmathsetmacro{\starangle}{360/4}
 \begin{scope}
 \draw[#4] (#3:#1)
@@ -52,89 +68,90 @@
 \tstar{\innerradius}{#1}{#2}{#3}{#4}
 }
 
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \begin{document}
 
 
-%\usym{2726}  % 4
-%\usym{2605}  % 5
-%\usym{2736}  % 6
-%\usym{2734}  % 8
-%\usym{2737}  % 8
-%\usym{2739}  % 12
-%\usym{2728}  % three parabola
-%\usym{263D}  % moon
-%\usym{1F31E} % sun
+\begin{centering}
+
+\begin{tikzpicture}[]
+    \tstar{0.7}{1.6}{5}{-18}{thick}  % 5 points
+\end{tikzpicture}
+\sep
+
+
+\begin{tikzpicture}
+    \tstar{0.7}{1.6}{6}{0}{thick}  % 6 points
+\end{tikzpicture}
+\sep
+
+
+\begin{tikzpicture}
+    \tstar{0.7}{1.6}{7}{-12.8}{thick}  % 7 points
+\end{tikzpicture}
+\sep
+
+
+\begin{tikzpicture}
+    \tstar{0.7}{1.6}{8}{0}{thick}  % 8 points
+\end{tikzpicture}
+\sep
+
+
+\begin{tikzpicture}
+    \dstar{0.5}{1.6}{0}{thick}{0.66}  % double
+\end{tikzpicture}
+\sep
+
+\begin{tikzpicture}
+    \dstar{0.4}{1.9}{0}{thick}{0.66}  % double
+\end{tikzpicture}
+\sep
+
+\end{centering}
+
+
+
 
 \begin{centering}
 
-\sep
-% 5 star
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.5}{3.6}{5}{18}{thick}
-\end{tikzpicture}
-\sep
-
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.2}{3.2}{5}{18}{thick}
-\end{tikzpicture}
-\sep
-
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1}{3}{5}{18}{thick}
-\end{tikzpicture}
-\sep
-
-% 6 star
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.5}{4}{6}{0}{thick}
-\end{tikzpicture}
-\sep
-
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.2}{3.6}{6}{30}{thick}
-\end{tikzpicture}
-\sep
-
-% 7 star
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.6}{4}{7}{12.8}{thick}
-\end{tikzpicture}
-\sep
-
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.3}{3.6}{7}{12.8}{thick}
-\end{tikzpicture}
-\sep
-
-% 8 star
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.6}{4}{8}{0}{thick}
-\end{tikzpicture}
-\sep
-
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \tstar{1.2}{3.6}{8}{0}{thick}
+\begin{tikzpicture}[]
+    \tstar{0.6}{1.6}{5}{-18}{thick}  % 5 points
 \end{tikzpicture}
 \sep
 
 
-% double star
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \dstar{1}{5}{0}{thick}{0.66}
-\end{tikzpicture}
-\sep
-
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \dstar{0.8}{4.5}{0}{thick}{0.5}
-\end{tikzpicture}
-\sep
-
-\begin{tikzpicture}[scale=0.3937] %  0.3937 is approximately the conversion factor from cm to inches (1 cm = 0.3937 in)
-    \dstar{0.7}{4}{0}{thick}{0.5}
+\begin{tikzpicture}
+    \tstar{0.5}{1.6}{6}{0}{thick}  % 6 points
 \end{tikzpicture}
 \sep
 
 
+\begin{tikzpicture}
+    \tstar{0.55}{1.6}{7}{-12.8}{thick}  % 7 points
+\end{tikzpicture}
+\sep
+
+
+\begin{tikzpicture}
+    \tstar{0.6}{1.6}{8}{0}{thick}  % 8 points
+\end{tikzpicture}
+\sep
+
+
+\begin{tikzpicture}
+    \dstar{0.3}{1.6}{0}{thick}{0.66}  % double
+\end{tikzpicture}
+\sep
+
+\begin{tikzpicture}
+    \dstar{0.3}{1.9}{0}{thick}{0.66}  % double
+\end{tikzpicture}
+\sep
 
 \end{centering}
+
+
+
 \end{document}

@@ -1,5 +1,1 @@
-wasysym
-zapfding
-symbol
-utfsym
 pgf
