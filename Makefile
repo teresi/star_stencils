@@ -19,13 +19,15 @@ install:
 stencil.pdf: stencil.tex requirements.txt
 	max_print_line=96 \
 		latexmk -pdf -time -use-make stencil.tex
+	pdftk $@ burst
 
 
 stencil.svg: stencil.pdf
-	pdf2svg $< $@
+	pdf2svg $< $(basename $@)-%02d.svg all
 
 
 .PHONY: clean
 clean:
 	latexmk -f -C stencil.pdf
-	rm -f stencil.svg
+	rm -f *.svg
+	rm -f *.pdf
